@@ -8,7 +8,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     private boolean[][] open;
     private WeightedQuickUnionUF uf;
-    private WeightedQuickUnionUF ufull;
+    //private WeightedQuickUnionUF ufull;
     private int size;
     private int top;
     private int bottom;
@@ -25,7 +25,7 @@ public class Percolation {
         this.bottom = n * n + 1;
         this.open = new boolean[n][n];
         this.numOfOpenSites = 0;
-        this.ufull = new WeightedQuickUnionUF(n * n + 1);
+        //this.ufull = new WeightedQuickUnionUF(n * n + 1);
         this.uf = new WeightedQuickUnionUF(n * n + 2);
     }
 
@@ -39,7 +39,7 @@ public class Percolation {
         int idx = to1D(row, col);
         if (row == 1) {
             uf.union(top, idx);
-            ufull.union(top, idx);
+            //ufull.union(top, idx);
         }
 
         if (row == size) {
@@ -48,22 +48,22 @@ public class Percolation {
 
         if (row - 1 > 0 && row - 1 < size && isOpen(row - 1, col)) {
             uf.union(idx, to1D(row - 1, col));
-            ufull.union(idx, to1D(row - 1, col));
+            //ufull.union(idx, to1D(row - 1, col));
         }
 
-        if (row + 1 > 0 && row < size && isOpen(row + 1, col)) {
+        if (row + 1 > 0 && row + 1 < size + 1 && isOpen(row + 1, col)) {
             uf.union(idx, to1D(row + 1, col));
-            ufull.union(idx, to1D(row + 1, col));
+            //ufull.union(idx, to1D(row + 1, col));
         }
 
         if (col - 1 > 0 && col - 1 < size && isOpen(row, col - 1)) {
             uf.union(idx, to1D(row, col - 1));
-            ufull.union(idx, to1D(row, col - 1));
+            //ufull.union(idx, to1D(row, col - 1));
         }
 
-        if (col + 1 > 0 && col < size && isOpen(row, col + 1)) {
+        if (col + 1 > 0 && col + 1 < size + 1 && isOpen(row, col + 1)) {
             uf.union(idx, to1D(row, col + 1));
-            ufull.union(idx, to1D(row, col + 1));
+            //ufull.union(idx, to1D(row, col + 1));
         }
     }
 
@@ -76,7 +76,7 @@ public class Percolation {
     public boolean isFull(int row, int col) {
         // is site (row, col) full?
         isValidIndex(row, col);
-        return ufull.connected(to1D(row, col), top);
+        return uf.connected(to1D(row, col), top);
     }
 
     private void isValidIndex(int i, int j) {
