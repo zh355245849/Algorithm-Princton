@@ -17,8 +17,9 @@ public class FastCollinearPoints {
         }
         this.map = new HashMap<>();
         Point[] copy = Arrays.copyOf(points, points.length);
-        for (int i = 1; i < points.length; i++) {
-            if (points[i].compareTo(points[i - 1]) == 0) {
+        Arrays.sort(copy);
+        for (int i = 1; i < copy.length; i++) {
+            if (copy[i].compareTo(copy[i - 1]) == 0) {
                 throw new IllegalArgumentException();
             }
         }
@@ -47,8 +48,9 @@ public class FastCollinearPoints {
                 pp.add(pivot);
                 addToSegmentsIfNotExist(pp, slop);
             }
-
         }
+        this.lines = list.toArray(new LineSegment[list.size()]);
+        this.count = lines.length;
     }
 
     private void addToSegmentsIfNotExist(List<Point> pp, double slop) {
@@ -73,7 +75,7 @@ public class FastCollinearPoints {
 
     public int numberOfSegments() {
         // the number of line segments
-        return count;
+        return list.size();
     }
 
     public LineSegment[] segments() {
