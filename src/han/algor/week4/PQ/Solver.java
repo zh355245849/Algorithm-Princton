@@ -39,12 +39,7 @@ public class Solver {
 
     }
 
-    private MinPQ<SearchNode> minPQ = new MinPQ<SearchNode>(new Comparator<SearchNode>() {
-        @Override
-        public int compare(SearchNode o1, SearchNode o2) {
-            return o1.priority - o2.priority;
-        }
-    });
+    private MinPQ<SearchNode> minPQ = new MinPQ<SearchNode>();
     private Stack<Board> solutionQueue = new Stack<Board>();
 
     public Solver(Board initial) {

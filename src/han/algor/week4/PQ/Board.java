@@ -1,9 +1,8 @@
 package han.algor.week4.PQ;
 
-import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.StdOut;
-
-import java.util.Comparator;
+import java.util.Queue;
+import java.util.LinkedList;
 
 /**
  * Created by zh355245849 on 2017/2/21.
@@ -127,41 +126,34 @@ public class Board {
             }
         }
 
-        MinPQ<Board> minHeap = new MinPQ<>(new Comparator<Board>() {
-            @Override
-            public int compare(Board o1, Board o2) {
-                if (o1.manhattan() < o2.manhattan()) return -1;
-                else if (o1.manhattan() == o2.manhattan()) return 0;
-                else return 1;
-            }
-        });
+        Queue<Board> queue = new LinkedList<Board>();
 
         if (isValid(blankx - 1, blanky)) {
             int[][] temp = getCopy(board);
             temp[blankx][blanky] = temp[blankx - 1][blanky];
             temp[blankx - 1][blanky] = 0;
-            minHeap.insert(new Board(temp));
+            queue.offer(new Board(temp));
         }
         if (isValid(blankx + 1, blanky)) {
             int[][] temp = getCopy(board);
             temp[blankx][blanky] = temp[blankx + 1][blanky];
             temp[blankx + 1][blanky] = 0;
-            minHeap.insert(new Board(temp));
+            queue.offer(new Board(temp));
         }
         if (isValid(blankx, blanky - 1)) {
             int[][] temp = getCopy(board);
             temp[blankx][blanky] = temp[blankx][blanky - 1];
             temp[blankx][blanky - 1] = 0;
-            minHeap.insert(new Board(temp));
+            queue.offer(new Board(temp));
         }
         if (isValid(blankx, blanky + 1)) {
             int[][] temp = getCopy(board);
             temp[blankx][blanky] = temp[blankx][blanky + 1];
             temp[blankx][blanky + 1] = 0;
-            minHeap.insert(new Board(temp));
+            queue.offer(new Board(temp));
         }
 
-        return minHeap;
+        return queue;
     }
 
     private boolean isValid(int x, int y) {
