@@ -1,5 +1,6 @@
 package han.data_structure;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
@@ -90,13 +91,15 @@ public class MyArrayDeque {
         deque.addFirst(123);
         deque.addLast(111);
         deque.addFirst(996);
-        deque.print();
-        System.out.println(deque.isFull());
-        System.out.println(deque.peekFirst());
-        System.out.println(deque.peekLast());
-        System.out.println(deque.getSize());
-        System.out.println(deque.pollFirst());
-        System.out.println(deque.pollLast());
-        System.out.println(deque.isEmpty());
+        Deque<Integer> deque1 = new ArrayDeque<>();
+        deque1.offerLast(1);
+        deque1.offerFirst(2);
+        deque1.offerFirst(3);
+        deque1.offerFirst(4);
+        for (Integer i : deque1) {
+            System.out.println(i);
+        }
+        System.out.println(deque1.pollFirst());
+        System.out.println(deque1.pollLast());
     }
 }
